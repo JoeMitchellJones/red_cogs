@@ -43,7 +43,7 @@ class PokerPoll:
 
             good_boys = "\n".join(boy.mention for boy, status in react_hist.items() if status == True)
             bad_boys = "\n".join(boy.mention for boy, status in react_hist.items() if status == False)
-            dash = "\n" + "-"*30
+            dash = "\n" + "-"*30 + "\n"
             edit_string = f"@desu poker time?\n\ni play to win kid{dash}{good_boys}\n\npoker's for nerds{dash}{bad_boys}"
 
             await self.bot.edit_message(poll, new_content=edit_string)
