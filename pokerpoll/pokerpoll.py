@@ -35,8 +35,8 @@ class PokerPoll:
                 react_hist[reacts.user] = False
 
             edit_string = "@desu poker time?\n\ni play to win kid\n--------------------------{}\n\npoker's for nerds\n--------------------------{}"
-            edit_string.format("\n".join(boy for boy, status in react_hist.items() if status == True),
-                              "\n".join(boy for boy, status in react_hist.items() if status == False))
+            edit_string.format("\n".join(boy.mention for boy, status in react_hist.items() if status == True),
+                               "\n".join(boy.mention for boy, status in react_hist.items() if status == False))
 
             await self.bot.edit_message(poll, new_content=edit_string)
             
