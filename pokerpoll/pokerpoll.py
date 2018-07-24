@@ -12,7 +12,7 @@ class PokerPoll:
         """This does stuff!"""
 
         if ctx.message.channel.name != "poker":
-            self.bot.say("bloodninja: Baby, I been havin a tough night so treat me nice aight?
+            await self.bot.say("""bloodninja: Baby, I been havin a tough night so treat me nice aight?
     BritneySpears14: Aight.
     bloodninja: Slip out of those pants baby, yeah.
     BritneySpears14: I slip out of my pants, just for you, bloodninja.
@@ -32,7 +32,7 @@ class PokerPoll:
     bloodninja: Robots are trying to drill my brain but my lightning shield inflicts DOA attack, leaving the robots as flaming piles of metal.
     bloodninja: King Arthur congratulates me for destroying Dr. Robotnik's evil army of Robot Socialist Republics. The cold war ends. Reagan steals my accomplishments and makes like it was cause of him.
     bloodninja: You still there baby? I think it's getting hard now.
-    bloodninja: Baby?")
+    bloodninja: Baby?""")
             return
 
         reactions = [
