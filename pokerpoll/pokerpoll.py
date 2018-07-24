@@ -28,8 +28,6 @@ class PokerPoll:
         while True:
             reaction, user = await self.bot.wait_for_reaction(reactions, message=poll)
 
-            reaction = str(reaction)
-
             react_hist[user] = None
             if reaction == "\N{FACE WITH TEARS OF JOY}":
                 react_hist[user] = True
@@ -37,6 +35,9 @@ class PokerPoll:
                 react_hist[user] = False
             else:
                 await self.bot.say("yabba dabba doo")
+                print repr(reaction)
+                print reaction
+                
 
             good_boys = "\n".join(boy.mention for boy, status in react_hist.items() if status == True)
             bad_boys = "\n".join(boy.mention for boy, status in react_hist.items() if status == False)
