@@ -7,7 +7,8 @@ class PokerPoll:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(name="pokerpoll",
+                      aliases=["pp","poker"])
     async def poker_poll(self):
         """This does stuff!"""
 
@@ -50,7 +51,7 @@ class PokerPoll:
                 edit_string += "\n"
                 edit_string += user.mention
 
-            await client.edit_message(poll, new_content=edit_string, *, embed=None)
+            await client.edit_message(poll, new_content=edit_string)
             
 
 def setup(bot):
