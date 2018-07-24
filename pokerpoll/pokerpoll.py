@@ -7,10 +7,33 @@ class PokerPoll:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="pokerpoll",
-                      aliases=["pp","poker"])
-    async def poker_poll(self):
+    @commands.command(name="pokerpoll", aliases=["pp","poker"], pass_context=True)
+    async def poker_poll(self, ctx):
         """This does stuff!"""
+
+        if ctx.message.channel.name != "poker":
+            self.bot.say("bloodninja: Baby, I been havin a tough night so treat me nice aight?
+    BritneySpears14: Aight.
+    bloodninja: Slip out of those pants baby, yeah.
+    BritneySpears14: I slip out of my pants, just for you, bloodninja.
+    bloodninja: Oh yeah, aight. Aight, I put on my robe and wizard hat.
+    BritneySpears14: Oh, I like to play dress up.
+    bloodninja: Me too baby.
+    BritneySpears14: I kiss you softly on your chest.
+    bloodninja: I cast Lvl. 3 Eroticism. You turn into a real beautiful woman.
+    BritneySpears14: Hey…
+    bloodninja: I meditate to regain my mana, before casting Lvl. 8 Cock of the Infinite.
+    BritneySpears14: Funny I still don't see it.
+    bloodninja: I spend my mana reserves to cast Mighty F*ck of the Beyondness.
+    BritneySpears14: You are the worst cyber partner ever. This is ridiculous.
+    bloodninja: Don't f*ck with me bitch, I'm the mightiest sorcerer of the lands.
+    bloodninja: I steal yo soul and cast Lightning Lvl. 1,000,000 Your body explodes into a fine bloody mist, because you are only a Lvl. 2 Druid.
+    BritneySpears14: Don't ever message me again you piece of ****.
+    bloodninja: Robots are trying to drill my brain but my lightning shield inflicts DOA attack, leaving the robots as flaming piles of metal.
+    bloodninja: King Arthur congratulates me for destroying Dr. Robotnik's evil army of Robot Socialist Republics. The cold war ends. Reagan steals my accomplishments and makes like it was cause of him.
+    bloodninja: You still there baby? I think it's getting hard now.
+    bloodninja: Baby?")
+            return
 
         reactions = [
             "\N{FACE WITH TEARS OF JOY}",
