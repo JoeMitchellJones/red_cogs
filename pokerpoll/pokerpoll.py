@@ -33,6 +33,8 @@ class PokerPoll:
                 react_hist[reacts.user] = True
             elif reacts.reaction == "\N{POUTING FACE}":
                 react_hist[reacts.user] = False
+            else:
+                await self.bot.say("yabba dabba doo")
 
             good_boys = "\n".join(boy.mention for boy, status in react_hist.items() if status == True)
             bad_boys = "\n".join(boy.mention for boy, status in react_hist.items() if status == False)
