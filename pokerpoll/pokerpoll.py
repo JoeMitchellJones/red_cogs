@@ -18,7 +18,7 @@ class PokerPoll:
             ]
 
         #Your code will go here
-        poll = await self.bot.say("@desu poker time?\n\ni play to win kid\n\npoker's for nerds")
+        poll = await self.bot.say("@desu poker time?\n\ni play to win kid\n--------------------------\n\npoker's for nerds\n--------------------------")
 
         for reaction in reactions:
             await self.bot.add_reaction(poll, reaction)
@@ -35,8 +35,8 @@ class PokerPoll:
                 react_hist[reacts.user] = False
 
             edit_string = "@desu poker time?\n\ni play to win kid\n--------------------------{}\n\npoker's for nerds\n--------------------------{}"
-                say_string.format("\n".join(boy for boy, status in react_hist.items() if status == True)
-                                  , "\n".join(boy for boy, status in react_hist.items() if status == False))
+            say_string.format("\n".join(boy for boy, status in react_hist.items() if status == True),
+                              "\n".join(boy for boy, status in react_hist.items() if status == False))
 
             await self.bot.edit_message(poll, new_content=edit_string)
             
