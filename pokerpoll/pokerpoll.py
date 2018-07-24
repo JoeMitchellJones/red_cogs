@@ -27,7 +27,7 @@ class PokerPoll:
         bad_boys = []
 
         while True:
-            reacts = await client.wait_for_reaction(reactions, message=poll)
+            reacts = await self.bot.wait_for_reaction(reactions, message=poll)
 
             if reacts.reaction == "\N{FACE WITH TEARS OF JOY}":
                 if reacts.user in good_boys:
@@ -51,7 +51,7 @@ class PokerPoll:
                 edit_string += "\n"
                 edit_string += user.mention
 
-            await client.edit_message(poll, new_content=edit_string)
+            await self.bot.edit_message(poll, new_content=edit_string)
             
 
 def setup(bot):
