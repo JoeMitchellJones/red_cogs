@@ -34,8 +34,8 @@ class PokerPoll:
             elif reacts.reaction == "\N{POUTING FACE}":
                 react_hist[reacts.user] = False
 
-            good_boys = "\n".join(boy for boy, status in react_hist.items() if status == True)
-            bad_boys = "\n".join(boy for boy, status in react_hist.items() if status == False)
+            good_boys = "\n".join(boy.mention for boy, status in react_hist.items() if status == True)
+            bad_boys = "\n".join(boy.mention for boy, status in react_hist.items() if status == False)
             dash = "\n" + "-"*30
             edit_string = f"@desu poker time?\n\ni play to win kid{dash}{good_boys}\n\npoker's for nerds{dash}{bad_boys}"
 
