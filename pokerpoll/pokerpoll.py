@@ -26,12 +26,13 @@ class PokerPoll:
         react_hist = {}
 
         while True:
-            reaction, user = await self.bot.wait_for_reaction(reactions, message=poll)
+            reaction, user = await self.bot.wait_for_reaction(reactions, message=poll, check=check)
+
 
             react_hist[user] = None
-            if reaction == "\N{FACE WITH TEARS OF JOY}":
+            if reaction.emoji == "\N{FACE WITH TEARS OF JOY}":
                 react_hist[user] = True
-            elif reaction == "\N{POUTING FACE}":
+            elif reaction.emoji == "\N{POUTING FACE}":
                 react_hist[user] = False
             else:
                 await self.bot.say("yabba dabba doo")
@@ -47,6 +48,8 @@ class PokerPoll:
 
             await self.bot.edit_message(poll, new_content=edit_string)
             
+def check(reaction, check_user):
+    return not check_user.bot
 
 def setup(bot):
     bot.add_cog(PokerPoll(bot))
