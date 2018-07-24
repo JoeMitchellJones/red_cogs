@@ -26,13 +26,15 @@ class PokerPoll:
         react_hist = {}
 
         while True:
-            reacts = await self.bot.wait_for_reaction(reactions, message=poll)
+            reaction, user = await self.bot.wait_for_reaction(reactions, message=poll)
 
-            react_hist[reacts.user] = None
-            if reacts.reaction == "\N{FACE WITH TEARS OF JOY}":
-                react_hist[reacts.user] = True
-            elif reacts.reaction == "\N{POUTING FACE}":
-                react_hist[reacts.user] = False
+            reaction = str(reaction)
+
+            react_hist[user] = None
+            if reaction == "\N{FACE WITH TEARS OF JOY}":
+                react_hist[user] = True
+            elif reaction == "\N{POUTING FACE}":
+                react_hist[user] = False
             else:
                 await self.bot.say("yabba dabba doo")
 
