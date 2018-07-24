@@ -35,8 +35,8 @@ class PokerPoll:
                 react_hist[user] = False
             else:
                 await self.bot.say("yabba dabba doo")
-                print repr(reaction)
-                print reaction
+                print(repr(reaction))
+                print(reaction)
                 
 
             good_boys = "\n".join(boy.mention for boy, status in react_hist.items() if status == True)
