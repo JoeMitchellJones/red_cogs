@@ -23,33 +23,20 @@ class PokerPoll:
         for reaction in reactions:
             await self.bot.add_reaction(poll, reaction)
 
-        good_boys = []
-        bad_boys = []
+        react_hist = {}
 
         while True:
             reacts = await self.bot.wait_for_reaction(reactions, message=poll)
 
+            react_hist[reacts.user] = None
             if reacts.reaction == "\N{FACE WITH TEARS OF JOY}":
-                if reacts.user in good_boys:
-                    good_boys.remove(reacts.user)
-                else:
-                    bad_boys.remove(reacts.user)
-                    good_boys.append(reacts.user)
-            else:
-                if reacts.user in bad_boys:
-                    bad_boys.remove(reacts.user)
-                else:
-                    good_boys.remove(reacts.user)
-                    bad_boys.append(reacts.user)
+                react_hist[reacts.user] = True
+            elif reacts.reaction == "\N{POUTING FACE}":
+                react_hist[reacts.user] = False
 
-            edit_string = "@desu poker time?\n\ni play to win kid"
-            for user in good_boys:
-                edit_string += "\n"
-                edit_string += user.mention
-                edit_string += "\n\npoker's for nerds"
-            for user in bad_boys:
-                edit_string += "\n"
-                edit_string += user.mention
+            edit_string = "@desu poker time?\n\ni play to win kid\n--------------------------{}\n\npoker's for nerds\n--------------------------{}"
+                say_string.format("\n".join(boy for boy, status in react_hist.items() if status == True)
+                                  , "\n".join(boy for boy, status in react_hist.items() if status == False))
 
             await self.bot.edit_message(poll, new_content=edit_string)
             
