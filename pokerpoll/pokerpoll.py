@@ -1,7 +1,7 @@
+import datetime
+import dateutil
 import discord
 from discord.ext import commands
-from datetime import datetime, timedelta as dt, tdelta
-from dateutil import parser as dt_parser
 
 
 class PokerPoll:
@@ -13,7 +13,7 @@ class PokerPoll:
         self.reactions = [
             "\N{FACE WITH TEARS OF JOY}",
             "\N{POUTING FACE}"
-            ]
+        ]
 
     @commands.command(name="pokerpoll", aliases=["pp", "poker"], pass_context=True)
     async def poker_poll(self, ctx, playtime="now"):
@@ -21,11 +21,11 @@ class PokerPoll:
         instant = False
 
         if playtime == "now":
-            playtime = dt.now() + tdelta(hours=1)
+            playtime = datetime.datetime.now() + datetime.timedelta(hours=1)
             instant = True
         else:
             try:
-                playtime = dt_parser(playtime)
+                playtime = dateutil.parser(playtime)
             except ValueError:
                 self.bot.say("wot fukin time is that diked?")
                 return
@@ -93,7 +93,7 @@ bloodninja: Baby?""")
 
             await self.bot.edit_message(poll, new_content=edit_string)
 
-            if playtime >= dt.now():
+            if playtime >= datetime.datetime.now():
                 time_to_duel = True
                 if not instant:
                     await self.bot.say(f"@here its time to duel{self.dash}{good_boys}")
