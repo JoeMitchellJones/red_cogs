@@ -36,7 +36,6 @@ class PokerPoll:
                     self.bot.say("wot fukin time is that diked?")
                     return
 
-<<<<<<< HEAD
         if ctx.message.channel.name != "poker":
             await self.bot.say("""bloodninja: Baby, I been havin a tough night so treat me nice aight?"
                     BritneySpears14: Aight.
@@ -60,13 +59,6 @@ class PokerPoll:
                     bloodninja: You still there baby? I think it's getting hard now.
                     bloodninja: Baby?""")
             return
-=======
-            if twelve_hour == "pm":
-                    playhour += 12
-        except ValueError:
-            self.bot.say("wot fukin time is that diked?")
-            return None
->>>>>>> 8c5d9c1b647338692b4a12ef80b5f6c0dd063e87
 
         #  Your code will go here
         poll = await self.bot.say("@here poker time?\n\n"
