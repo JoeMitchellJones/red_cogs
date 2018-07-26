@@ -46,21 +46,25 @@ class PokerPoll:
             playhour = dt.now().hour + 1
             playminute = dt.now().minute
 
-        playtime = playtime.lower()
-        twelve_hour = [x for x in ["am", "pm"] if x in playtime]
+        try:
+            playtime = playtime.lower()
+            twelve_hour = [x for x in ["am", "pm"] if x in playtime]
 
-        if twelve_hour and not len(twelve_hour) > 1:
-            twelve_hour = "".join(twelve_hour)
-            playtime = playtime.replace(twelve_hour, "")
+            if twelve_hour and not len(twelve_hour) > 1:
+                twelve_hour = "".join(twelve_hour)
+                playtime = playtime.replace(twelve_hour, "")
 
-        if ":" in playtime:
-            playhour, playminute = map(int, playtime.split(":"))
-        else:
-            playhour = int(playtime)
-            playminute = 0
+            if ":" in playtime:
+                playhour, playminute = map(int, playtime.split(":"))
+            else:
+                playhour = int(playtime)
+                playminute = 0
 
-        if twelve_hour == "am":
-                playhour += 12
+            if twelve_hour == "am":
+                    playhour += 12
+        except ValueError:
+            self.bot.say("wot fukin time is that diked?")
+            return None
 
         #  Your code will go here
         poll = await self.bot.say("@here poker time?\n\n"
