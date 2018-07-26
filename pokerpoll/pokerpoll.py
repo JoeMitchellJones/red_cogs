@@ -27,7 +27,7 @@ class PokerPoll:
             try:
                 playtime = dateutil.parser(playtime)
             except ValueError:
-                self.bot.say("wot fukin time is that diked?")
+                await self.bot.say("wot fukin time is that diked?")
                 return
 
         if ctx.message.channel.name != "poker":
