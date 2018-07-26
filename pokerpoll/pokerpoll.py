@@ -26,7 +26,7 @@ class PokerPoll:
         else:
             try:
                 playtime = dt_parser(playtime)
-            except ValueError
+            except ValueError:
                 self.bot.say("wot fukin time is that diked?")
                 return
 
