@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from datetime import datetime as dt
+from datetime import datetime, timedelta as dt, tdelta
 
 
 class PokerPoll:
@@ -18,53 +18,47 @@ class PokerPoll:
     async def poker_poll(self, ctx, playtime="now"):
         """This does stuff!"""
 
-        if ctx.message.channel.name != "poker":
-            await self.bot.say("bloodninja: Baby, I been havin a tough night so treat me nice aight?"
-                    "BritneySpears14: Aight."
-                    "bloodninja: Slip out of those pants baby, yeah."
-                    "BritneySpears14: I slip out of my pants, just for you, bloodninja."
-                    "bloodninja: Oh yeah, aight. Aight, I put on my robe and wizard hat."
-                    "BritneySpears14: Oh, I like to play dress up."
-                    "bloodninja: Me too baby."
-                    "BritneySpears14: I kiss you softly on your chest."
-                    "bloodninja: I cast Lvl. 3 Eroticism. You turn into a real beautiful woman."
-                    "BritneySpears14: Hey…"
-                    "bloodninja: I meditate to regain my mana, before casting Lvl. 8 Cock of the Infinite."
-                    "BritneySpears14: Funny I still don't see it."
-                    "bloodninja: I spend my mana reserves to cast Mighty F*ck of the Beyondness."
-                    "BritneySpears14: You are the worst cyber partner ever. This is ridiculous."
-                    "bloodninja: Don't f*ck with me bitch, I'm the mightiest sorcerer of the lands."
-                    "bloodninja: I steal yo soul and cast Lightning Lvl. 1,000,000 Your body explodes into a fine bloody mist, because you are only a Lvl. 2 Druid."
-                    "BritneySpears14: Don't ever message me again you piece of ****."
-                    "bloodninja: Robots are trying to drill my brain but my lightning shield inflicts DOA attack, leaving the robots as flaming piles of metal."
-                    "bloodninja: King Arthur congratulates me for destroying Dr. Robotnik's evil army of Robot Socialist Republics. The cold war ends. Reagan steals my accomplishments and makes like it was cause of him."
-                    "bloodninja: You still there baby? I think it's getting hard now."
-                    "bloodninja: Baby?")
-            return None
-
         if playtime == "now":
-            playhour = dt.now().hour + 1
-            playminute = dt.now().minute
+            playtime = dt.now() + tdelta(hours=1)
+        else:
+            try:
+                playtime = dt.strptime(playtime, '%I%p').replace(
+                    year=dt.now().year
+                    month=dt.now().month
+                    day=dt.now().day)
+            except ValueError:
+                try:
+                    playtime = dt.strptime(playtime, '%H%M').replace(
+                    year=dt.now().year
+                    month=dt.now().month
+                    day=dt.now().day)
+                except ValueError
+                    self.bot.say("wot fukin time is that diked?")
+                    return
 
-        try:
-            playtime = playtime.lower()
-            twelve_hour = [x for x in ["am", "pm"] if x in playtime]
-
-            if twelve_hour and not len(twelve_hour) > 1:
-                twelve_hour = "".join(twelve_hour)
-                playtime = playtime.replace(twelve_hour, "")
-
-            if ":" in playtime:
-                playhour, playminute = map(int, playtime.split(":"))
-            else:
-                playhour = int(playtime)
-                playminute = 0
-
-            if twelve_hour == "am":
-                    playhour += 12
-        except ValueError:
-            self.bot.say("wot fukin time is that diked?")
-            return None
+        if ctx.message.channel.name != "poker":
+            await self.bot.say("""bloodninja: Baby, I been havin a tough night so treat me nice aight?"
+                    BritneySpears14: Aight.
+                    bloodninja: Slip out of those pants baby, yeah.
+                    BritneySpears14: I slip out of my pants, just for you, bloodninja.
+                    bloodninja: Oh yeah, aight. Aight, I put on my robe and wizard hat.
+                    BritneySpears14: Oh, I like to play dress up.
+                    bloodninja: Me too baby.
+                    BritneySpears14: I kiss you softly on your chest.
+                    bloodninja: I cast Lvl. 3 Eroticism. You turn into a real beautiful woman.
+                    BritneySpears14: Hey…
+                    bloodninja: I meditate to regain my mana, before casting Lvl. 8 Cock of the Infinite.
+                    BritneySpears14: Funny I still don't see it.
+                    bloodninja: I spend my mana reserves to cast Mighty F*ck of the Beyondness.
+                    BritneySpears14: You are the worst cyber partner ever. This is ridiculous.
+                    bloodninja: Don't f*ck with me bitch, I'm the mightiest sorcerer of the lands.
+                    bloodninja: I steal yo soul and cast Lightning Lvl. 1,000,000 Your body explodes into a fine bloody mist, because you are only a Lvl. 2 Druid.
+                    BritneySpears14: Don't ever message me again you piece of ****.
+                    bloodninja: Robots are trying to drill my brain but my lightning shield inflicts DOA attack, leaving the robots as flaming piles of metal.
+                    bloodninja: King Arthur congratulates me for destroying Dr. Robotnik's evil army of Robot Socialist Republics. The cold war ends. Reagan steals my accomplishments and makes like it was cause of him.
+                    bloodninja: You still there baby? I think it's getting hard now.
+                    bloodninja: Baby?""")
+            return
 
         #  Your code will go here
         poll = await self.bot.say("@here poker time?\n\n"
@@ -76,6 +70,9 @@ class PokerPoll:
 
         react_hist = {}
         time_to_duel = False
+
+        def check(reaction, check_user):
+            return not check_user.bot
 
         while not time_to_duel:
             reaction, user = await self.bot.wait_for_reaction(self.reactions, message=poll, check=check)
@@ -102,15 +99,10 @@ class PokerPoll:
 
             await self.bot.edit_message(poll, new_content=edit_string)
 
-            now = dt.now()
-            if now.hour >= playhour and now.minute >= playminute:
+            if playtime >= dt.now():
                 time_to_duel = True
                 if not playtime == "now":
                     await self.bot.say(f"@here its time to duel{self.dash}{good_boys}")
-
-
-def check(reaction, check_user):
-    return not check_user.bot
 
 
 def setup(bot):
