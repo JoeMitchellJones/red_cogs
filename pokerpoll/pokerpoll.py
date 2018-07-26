@@ -9,7 +9,7 @@ class PokerPoll:
 
     def __init__(self, bot):
         self.bot = bot
-        self.dash = f"\n{-*32}\n"
+        self.dash = f"\n{'-'*32}\n"
         self.reactions = [
             "\N{FACE WITH TEARS OF JOY}",
             "\N{POUTING FACE}"
