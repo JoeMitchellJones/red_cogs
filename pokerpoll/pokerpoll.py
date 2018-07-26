@@ -18,9 +18,11 @@ class PokerPoll:
     @commands.command(name="pokerpoll", aliases=["pp", "poker"], pass_context=True)
     async def poker_poll(self, ctx, playtime="now"):
         """This does stuff!"""
+        instant = False
 
         if playtime == "now":
             playtime = dt.now() + tdelta(hours=1)
+            instant = True
         else:
             try:
                 playtime = dt_parser(playtime)
@@ -93,7 +95,7 @@ bloodninja: Baby?""")
 
             if playtime >= dt.now():
                 time_to_duel = True
-                if not playtime == "now":
+                if not instant:
                     await self.bot.say(f"@here its time to duel{self.dash}{good_boys}")
 
 
