@@ -60,7 +60,7 @@ class PokerPoll:
                 playhour = int(playtime)
                 playminute = 0
 
-            if twelve_hour == "am":
+            if twelve_hour == "pm":
                     playhour += 12
         except ValueError:
             self.bot.say("wot fukin time is that diked?")
