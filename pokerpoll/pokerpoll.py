@@ -93,7 +93,7 @@ bloodninja: Baby?""")
 
             await self.bot.edit_message(poll, new_content=edit_string)
 
-            if playtime >= datetime.datetime.now():
+            if playtime <= datetime.datetime.now():
                 time_to_duel = True
                 if not instant:
                     await self.bot.say(f"@here its time to duel{self.dash}{good_boys}")
