@@ -25,7 +25,7 @@ class PokerPoll:
             instant = True
         else:
             try:
-                playtime = dateutil.parser(playtime)
+                playtime = dateutil.parser.parse(playtime)
             except ValueError:
                 await self.bot.say("wot fukin time is that diked?")
                 return
