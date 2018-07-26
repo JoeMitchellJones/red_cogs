@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from datetime import datetime, timedelta as dt, tdelta
+from dateutil import parser as dt_parser
 
 
 class PokerPoll:
@@ -22,19 +23,10 @@ class PokerPoll:
             playtime = dt.now() + tdelta(hours=1)
         else:
             try:
-                playtime = dt.strptime(playtime, '%I%p').replace(
-                    year=dt.now().year
-                    month=dt.now().month
-                    day=dt.now().day)
-            except ValueError:
-                try:
-                    playtime = dt.strptime(playtime, '%H%M').replace(
-                    year=dt.now().year
-                    month=dt.now().month
-                    day=dt.now().day)
-                except ValueError
-                    self.bot.say("wot fukin time is that diked?")
-                    return
+                playtime = dt_parser(playtime)
+            except ValueError
+                self.bot.say("wot fukin time is that diked?")
+                return
 
         if ctx.message.channel.name != "poker":
             await self.bot.say("""bloodninja: Baby, I been havin a tough night so treat me nice aight?"
